@@ -1,0 +1,356 @@
+﻿
+@if (Session["MaSV"] != null)
+{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/SV_Layout.cshtml";
+}
+else if (Session["MaGV"] != null)
+{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/GV_Layout.cshtml";
+}
+else
+{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutQLSV.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="~/Content/HomeAdmin.css" type="text/css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.2/chart.min.js"></script>
+    <script src="~/Content/charts/highcharts.js"></script>
+    <script src="~/Content/charts/exporting.js"></script>
+</head>
+<body>
+    <div class="Header" style="margin-top: -10px;">
+        <h1>Chương trình quản lý sinh viên</h1>
+        <p>Hệ thống quản lý thông tin và công việc của phòng đào tạo trường Đại Học Quy Nhơn</p>
+    </div>
+    <form method="post">
+        <div class="info" style="position: absolute; z-index: 1000;">
+            <a target="blank" href="https://www.facebook.com/Ph%C3%B2ng-C%C3%B4ng-t%C3%A1c-ch%C3%ADnh-tr%E1%BB%8B-sinh-vi%C3%AAn-Tr%C6%B0%E1%BB%9Dng-%C4%90%E1%BA%A1i-h%E1%BB%8Dc-Quy-Nh%C6%A1n-810259772662168" class="buble-box button-29">
+                <img id="img-bubble-box" src="https://qnu.edu.vn/Resources/Images/0logoDHQNnew.jpg">
+            </a>
+        </div>
+    </form>
+
+    <figure class="highcharts-figure">
+        <div class="a" style="display:flex; justify-content:space-around;">
+            <div id="container"></div>
+            <div id="form-gr"></div>
+        </div>
+    </figure>
+    <div class="container">
+        <div class="row mt-40">
+            <div class="col-sm-12">
+                <div id="print-tieude">
+                    <h1 class="txt-head">Sứ mệnh Tầm nhìn</h1>
+                    <div class="date fa fa-clock-o" aria-hidden="true">
+                        13/10/2017
+                    </div>
+                    <div class="fb-like fb_iframe_widget" data-href="http://qnu.edu.vn//vi/gioi-thieu-9/su-menh-tam-nhin" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true" fb-xfbml-state="rendered" fb-iframe-plugin-query="action=like&amp;app_id=&amp;container_width=1071&amp;href=http%3A%2F%2Fqnu.edu.vn%2F%2Fvi%2Fgioi-thieu-9%2Fsu-menh-tam-nhin&amp;layout=button_count&amp;locale=vi_VN&amp;sdk=joey&amp;share=true&amp;show_faces=true&amp;size=small"><span style="vertical-align: bottom; width: 150px; height: 28px;"><iframe name="fa609641f28088" width="1000px" height="1000px" data-testid="fb:like Facebook Social Plugin" title="fb:like Facebook Social Plugin" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" allow="encrypted-media" src="https://www.facebook.com/v2.8/plugins/like.php?action=like&amp;app_id=&amp;channel=https%3A%2F%2Fstaticxx.facebook.com%2Fx%2Fconnect%2Fxd_arbiter%2F%3Fversion%3D46%23cb%3Df397b356afce3ac%26domain%3Dqnu.edu.vn%26is_canvas%3Dfalse%26origin%3Dhttps%253A%252F%252Fqnu.edu.vn%252Ff1fe7b4969a6c1c%26relation%3Dparent.parent&amp;container_width=1071&amp;href=http%3A%2F%2Fqnu.edu.vn%2F%2Fvi%2Fgioi-thieu-9%2Fsu-menh-tam-nhin&amp;layout=button_count&amp;locale=vi_VN&amp;sdk=joey&amp;share=true&amp;show_faces=true&amp;size=small" style="border: none; visibility: visible; width: 150px; height: 28px;" class=""></iframe></span></div>
+                    <p class="description">
+                        Sứ mệnh Tầm nhìn Trường Đại học Quy Nhơn
+                    </p>
+                </div>
+                <div class="content-write">
+                    <div id="print-chitiet">
+                        <style>
+                            .chitietbaiviet .pdf_content {
+                                min-height: 500px;
+                            }
+                        </style>
+
+                        <div class="chitietbaiviet">
+                            <p><span style="color: #548dd4;">1. Sứ mệnh</span></p>
+                            <p>
+                                Trường Đại học Quy Nhơn là cơ sở giáo dục đại học đa ngành, đa lĩnh vực có sứ mệnh đào tạo, phát triển nguồn nhân lực chất lượng cao; bồi dưỡng nhân tài; nghiên cứu khoa học, truyền bá tri thức và chuyển giao công nghệ; phục vụ hiệu quả sự phát triển bền vững của đất nước, đặc biệt đối với khu vực Nam Trung Bộ - Tây Nguyên; góp phần thúc đẩy tiến bộ xã hội.<br>
+                                <br>
+                                <span style="color: #548dd4;">2. Tầm nhìn&nbsp;</span>
+                            </p>
+                            <p>
+                                Đến năm 2030, Trường Đại học Quy Nhơn sẽ là trường đại học đa ngành, đa lĩnh vực định hướng ứng dụng có uy tín cao, đạt tiêu chuẩn chất lượng của khu vực Đông Nam Á; có vị thế quan trọng về hợp tác đào tạo, nghiên cứu, trao đổi học thuật, giao lưu văn hóa trong nước và quốc tế.<br>
+                                <br>
+                                <span style="color: #548dd4;">3. Giá trị cốt lõi&nbsp;</span>
+                            </p>
+                            <p>
+                                Trách nhiệm - Chuyên nghiệp - Chất lượng - Sáng tạo - Nhân văn<br>
+                                <br>
+                            </p>
+                        </div>
+                        <div class="form-tag" style="padding-bottom: 10px;">
+
+                            <b>Từ khóa:</b>
+                            <ul class="portal-tags">
+                            </ul>
+                            <div id="ctl28_ctl03_pnTag">
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+
+                    </div>
+                </div>
+                <div class="gopy" style="display:  none ;">
+                    <div style="float: left; padding-bottom: 5px; width: 100%;">
+                        <div style="background-color: #37497e; border-radius: 6px; no-repeat; width: 100px; height: 24px; float: left;">
+                            <div style="font-weight: bold; font: 13px Verdana; color: #fff; padding-top: 3px; text-align: center" class="show_hide">
+                                <i class="fa fa-commenting"></i><span style="margin-left: 5px;">Bình luận</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="font-family: Verdana; font-size: small; color: #FF0000; float: left; width: 100%;">
+
+                    </div>
+                    <div id="error" style="float: left; display: none;">
+                        <div class="alert alert-success">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                            <strong>Thành công!</strong>
+                            Cám ơn bạn!!
+                        </div>
+                    </div>
+                    <div class="slidingDiv" style="float: left; display: none; padding-top: 20px; border-top: 1px solid rgb(194, 194, 194);">
+
+                        <form id="feedbackForm" data-disable="false" class="ng-pristine ng-valid">
+                            <div class="form-group">
+                                <label class="control-label" for="name">
+                                    Họ và tên (*)
+                                </label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Họ và tên..." required="">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-unchecked form-control-feedback"></i></span>
+                                </div>
+                                <span class="help-block" style="display: none;">Tên đăng nhập không được trống.</span>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="title">
+                                    Tiêu đề (*)
+                                </label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="title" name="title" maxlength="250" placeholder="Nhập vào tiêu đề" required="">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-unchecked form-control-feedback"></i></span>
+                                </div>
+                                <span class="help-block" style="display: none;">Nhập vào tiêu đề.</span>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="email">Email (*)</label>
+                                <div class="input-group">
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Email không hợp lệ..." required="">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-unchecked form-control-feedback"></i></span>
+                                </div>
+                                <span class="help-block" style="display: none;">Email không hợp lệ</span>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="message">
+                                    Nội dung (*)
+                                </label>
+                                <div class="input-group">
+                                    <textarea rows="5" cols="30" class="form-control" id="message" name="message" placeholder="Nhập vào nội dung" required=""></textarea>
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-unchecked form-control-feedback"></i></span>
+                                </div>
+                                <span class="help-block" style="display: none;">Nhập vào nội dung.</span>
+                            </div>
+                            <div class="form-group" style="float: left; width: 100%">
+                                <div class="">
+                                    <div class="col-md-3 col-sm-3 col-xs-12" style="padding: 5px 0px">
+                                        Mã xác nhận
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-12" style="padding: 5px 0px">
+
+                                        <div class="col-md-9 col-sm-9 col-xs-9 btn-group" style="padding: 0;">
+                                            <input name="ctl28$ctl03$txtcapcha" type="text" id="ctl28_ctl03_txtcapcha" class="form-control txtcapcha" placeholder="Mã xác nhận">
+                                        </div>
+                                        <div class="col-md-3 col-sm-3 col-xs-3" style="padding: 5px 0px">
+                                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEMAAAAXCAYAAABQ1fKSAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFuSURBVFhH7ZTZbcQwDERd3haUctLLtpJOvBpihpAV6ohD5GOjBxCwRrxMyT42m81m8zecn8XOYh/FqNWcT+4/isk3MuwrRn6VZmAtf+VNrJvC+cXEXDtoFDob7r2kx1MP/fAMDb6UsuvmoEZxGpSAaXXzvRNfaL7NZSTXXUNFZSgEq5q4XMtgDe4Ow55h5nwls+4cJEAAElLy5NUwgGkYUhADek15nNa1H3Q8cy/C439Zd4o5BwGWqBmGTxoWxaipyOgDvvnNTi6p7hQLaCYNTG+HUbBmsBe8QPeEpDPG18oFa2JaMuqO6Vw7YHo0jE5hMNzDy/BUL37qgXs9MuqOUSNIRkmYnj0M7OG59dNnENQTGXWn9Jro6nebgs4TivysFjTsUavJqDvFE1XflU8zaRiej/rU7wf/BbBadwlPJhtc26WmIqMPGOaQP3yogYy6t7FETUPvD25BcwN80lz/H/RJ1Lb6w9lsNm/OcbwA2hTgDvMqwMcAAAAASUVORK5CYII=" id="ctl28_ctl03_ImgCapcha">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2 col-sm-2 col-xs-12" style="display: none;">
+                                        <span id="ctl28_ctl03_lblCapcha">gYBKYB</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group" style="float: left; width: 100%">
+                                <div class="col-sx-6 col-sm-6 col-md-3">
+                                    <a class="btn btn-primary" id="feedbackSubmitnew" onclick="feedbackSubmitnew();" style="display: block; margin-top: 10px;"><i class="fa fa-floppy-o" aria-hidden="true"></i>Gửi</a>
+                                </div>
+                                <div class="col-sx-6 col-sm-6 col-md-3">
+                                    <a class="btn btn-primary" id="CancelSubmit" onclick="cancelSubmitn();" style="display: block; margin-top: 10px;"><i class="fa fa-undo" aria-hidden="true"></i>Hủy</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-sm-12">
+                <div class="widget">
+                    <ul class="share-article mt-60">
+                        <li><a href="javascript:void()" onclick="PrintDiv()"><i class="fa fa-print"></i></a></li>
+                        <li data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://qnu.edu.vn//vi/gioi-thieu-9/su-menh-tam-nhin&amp;src=sdkpreparse"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="https://plus.google.com/share?url=http://qnu.edu.vn//vi/gioi-thieu-9/su-menh-tam-nhin"><i class="fa fa-google-plus"></i></a></li>
+                        <li><a href="https://twitter.com/share?url=http://qnu.edu.vn//vi/gioi-thieu-9/su-menh-tam-nhin"><i class="fa fa-twitter"></i></a></li>
+                    </ul>
+                </div>
+                <section class="col-lg-12">
+                    <div class="calendar-today ng-scope" ng-controller="LichTodayManageController">
+                        <div class="calendar-today-title">Lịch làm việc hôm nay</div>
+                        <!-- ngRepeat: x in LichTuan._danhSach --><ul class="list-inline ng-scope" ng-repeat="x in LichTuan._danhSach" ng-init="i=0">
+                            <!-- ngRepeat: dt in x.LichTuans -->
+                            <li ng-repeat="dt in x.LichTuans" ng-class="LichTuan._compareTime(dt.NgayGioBD)?'endtime':''" class="ng-scope">
+                                <div class="box">
+                                    <p>
+                                        <span class="time ng-binding">07:30 :</span><span class="noidung ng-binding"> Seminar Khoa Sư phạm: 1/ Xây dựng mô hình học cùng cộng đồng cho sinh viên các ngành sư phạm. 2/ Thuyết đa trí tuệ - lý thuyết và vận dụng trong dạy học phát triển năng lực học sinh</span>
+                                    </p>
+                                    <p class="ng-binding">
+                                        <span class="where">Địa điểm :</span>P. 208 Nhà A7
+                                    </p>
+                                </div>
+                            </li><!-- end ngRepeat: dt in x.LichTuans -->
+                            <li ng-repeat="dt in x.LichTuans" ng-class="LichTuan._compareTime(dt.NgayGioBD)?'endtime':''" class="ng-scope">
+                                <div class="box">
+                                    <p>
+                                        <span class="time ng-binding">08:30 :</span><span class="noidung ng-binding"> Bộ môn Kỹ thuật ô tô tổ chức Báo cáo seminar 1: Nghiên cứu cơ chế hình thành – tác hại và các giải pháp xử lí các chất ô nhiễm trong khí xả động cơ Diesel (Người báo cáo: ThS. Nguyễn Quốc Hoàng)</span>
+                                    </p>
+                                    <p class="ng-binding">
+                                        <span class="where">Địa điểm :</span>VP. Bộ môn KTOT
+                                    </p>
+                                </div>
+                            </li><!-- end ngRepeat: dt in x.LichTuans -->
+                            <li ng-repeat="dt in x.LichTuans" ng-class="LichTuan._compareTime(dt.NgayGioBD)?'endtime':''" class="ng-scope">
+                                <div class="box">
+                                    <p>
+                                        <span class="time ng-binding">09:30 :</span><span class="noidung ng-binding"> Bộ môn Kỹ thuật ô tô tổ chức Báo cáo seminar 2: Ứng dụng phần mềm NX trong việc tính toán, phân tích và mô phỏng ứng suất, biến dạng trong  piston (Người báo cáo: ThS. Nguyễn Bá Thu).</span>
+                                    </p>
+                                    <p class="ng-binding">
+                                        <span class="where">Địa điểm :</span>VP. Bộ môn KTOT
+                                    </p>
+                                </div>
+                            </li><!-- end ngRepeat: dt in x.LichTuans -->
+                            <li ng-repeat="dt in x.LichTuans" ng-class="LichTuan._compareTime(dt.NgayGioBD)?'endtime':''" class="ng-scope">
+                                <div class="box">
+                                    <p>
+                                        <span class="time ng-binding">13:30 :</span><span class="noidung ng-binding"> Khoa CNTT tổ chức Chương trình Ngày hội sinh viên CNTT và doanh nghiệp năm 2023</span>
+                                    </p>
+                                    <p class="ng-binding">
+                                        <span class="where">Địa điểm :</span>Hội trường B
+                                    </p>
+                                </div>
+                            </li><!-- end ngRepeat: dt in x.LichTuans -->
+                            <li ng-repeat="dt in x.LichTuans" ng-class="LichTuan._compareTime(dt.NgayGioBD)?'endtime':''" class="ng-scope">
+                                <div class="box">
+                                    <p>
+                                        <span class="time ng-binding">14:00 :</span><span class="noidung ng-binding"> Công tác chuẩn bị cho Ngày hội việc làm năm 2023</span>
+                                    </p>
+                                    <p class="ng-binding">
+                                        <span class="where">Địa điểm :</span>Nhà Luyện tập TDTT
+                                    </p>
+                                </div>
+                            </li><!-- end ngRepeat: dt in x.LichTuans -->
+                            <li ng-repeat="dt in x.LichTuans" ng-class="LichTuan._compareTime(dt.NgayGioBD)?'endtime':''" class="ng-scope">
+                                <div class="box">
+                                    <p>
+                                        <span class="time ng-binding">14:30 :</span><span class="noidung ng-binding"> Đánh giá, nghiệm thu đề tài khoa học và công nghệ cấp Bộ của TS. Phan Thanh Hải (Khoa Khoa học tự nhiên)</span>
+                                    </p>
+                                    <p class="ng-binding">
+                                        <span class="where">Địa điểm :</span>Phòng họp 1
+                                    </p>
+                                </div>
+                            </li><!-- end ngRepeat: dt in x.LichTuans -->
+                            <li ng-repeat="dt in x.LichTuans" ng-class="LichTuan._compareTime(dt.NgayGioBD)?'endtime':''" class="ng-scope">
+                                <div class="box">
+                                    <p>
+                                        <span class="time ng-binding">17:00 :</span><span class="noidung ng-binding"> Khai mạc Giải bóng đá Nam truyền thống năm 2023 chào mừng Kỷ niệm 133 năm Ngày sinh Chủ tịch Hồ Chí Minh (19/5/1890 - 19/5/2023) và Tháng Công nhân</span>
+                                    </p>
+                                    <p class="ng-binding">
+                                        <span class="where">Địa điểm :</span>Sân cỏ nhân tạo Trường Đại học Quy Nhơn
+                                    </p>
+                                </div>
+                            </li><!-- end ngRepeat: dt in x.LichTuans -->
+                        </ul><!-- end ngRepeat: x in LichTuan._danhSach -->
+                        <div class="acd-readmore">
+                            <a href="/module/lich-tuan" title="Xem chi tiết">Xem chi tiết</a>
+                        </div>
+                    </div>
+                </section>
+                <link href="/CSS/LichToday.css" rel="stylesheet">
+                <script src="/App/Admin/app/controllers/LichTuanManageController.js"></script>
+                <script src="/App/Admin/app/services/LichTuanManageService.js"></script>
+            </div>
+            <div class="col-sm-12">
+                <div class="widget container">
+                    <div id="ctl28_ctl03_pnCactinkhac">
+
+                        <h4 class="widget-header">Các tin khác </h4>
+
+                        <div class="col-md-6 col-lg-3 card-wrap">
+                            <a class="card" href="/vi/gioi-thieu-9/gioi-thieu-ve-cong-doan-truong-dai-hoc-quy-nhon">
+                                <img class="card-img-top" src="/Temp/ArticleImage/92de56b7-3bd5-41f3-839a-6d5d7b2e216b-2023-17.jpg" alt="">
+                                <div class="card-body">
+                                    <p class="date">
+                                        11/01/2018
+                                    </p>
+                                    <h5 class="card-title">Giới thiệu về Công đoàn Trường Đại học Quy Nhơn</h5>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="col-md-6 col-lg-3 card-wrap">
+                            <a class="card" href="/vi/gioi-thieu-9/lich-su-phat-trien-truong-dai-hoc-quy-nhon">
+                                <img class="card-img-top" src="/Resources/ImagePhoto/folder.png" alt="">
+                                <div class="card-body">
+                                    <p class="date">
+                                        16/10/2022
+                                    </p>
+                                    <h5 class="card-title">Lịch sử phát triển Trường Đại học Quy Nhơn</h5>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="col-md-6 col-lg-3 card-wrap">
+                            <a class="card" href="/vi/gioi-thieu-9/gioi-thieu-ban-giam-hieu">
+                                <img class="card-img-top" src="/Temp/ArticleImage/16b9511c-effb-40eb-8397-9460104367b8-logo 16 9-20.jpg" alt="">
+                                <div class="card-body">
+                                    <p class="date">
+                                        31/12/2020
+                                    </p>
+                                    <h5 class="card-title">Ban Giám hiệu</h5>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="col-md-6 col-lg-3 card-wrap">
+                            <a class="card" href="/vi/gioi-thieu-9/gioi-thieu-hoi-dong-truong-truong-dai-hoc-quy-nhon-nhiem-ky-2020-2025-5821">
+                                <img class="card-img-top" src="/Temp/ArticleImage/c89c98de-1c6e-48a2-84a5-050fddf886a6-Photo-HĐT-20.jpg" alt="">
+                                <div class="card-body">
+                                    <p class="date">
+                                        09/08/2020
+                                    </p>
+                                    <h5 class="card-title">Giới thiệu Hội đồng trường Trường Đại học Quy Nhơn nhiệm kỳ 2020-2025</h5>
+                                </div>
+                            </a>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+
+    </script>
+</body>
+
+</html>

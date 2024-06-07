@@ -1,0 +1,306 @@
+﻿@model PagedList.IPagedList<QLSV.Models.MonHoc>
+@using PagedList.Mvc
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutQLSV.cshtml";
+}
+<link href="~/Content/using.css" rel="stylesheet">
+<link href="~/Content/phantrang.css" rel="stylesheet">
+<style>
+    .fi {
+        border: 1px solid rgba(27, 31, 35, .15);
+        border-radius: 6px;
+        box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+        box-sizing: border-box;
+        color: black;
+        cursor: pointer;
+        display: inline-block;
+        font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 20px;
+        padding: 14px 16px;
+        position: relative;
+        text-align: center;
+        text-decoration: none;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        vertical-align: middle;
+        white-space: nowrap;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .timkhoa {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .tim-1 {
+        margin: 0 10px;
+        width: 30%;
+    }
+
+    .text-end {
+        display: flex;
+        align-items: center;
+    }
+
+    .form-wrapper {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .nutbam {
+        margin: 0 10px;
+    }
+
+    .new {
+        display: flex;
+        align-items: center;
+    }
+
+    .antuong-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+
+    .text-end-1 .thep {
+        margin: 0 10px;
+    }
+
+    .thep p {
+        position: relative;
+    }
+
+    .nutbam--1 {
+        background-color: #37497e;
+    }
+
+    .xuatfile {
+        border-radius: 10px;
+        background-color: #fff;
+        padding: 10px 16px;
+        text-align: center;
+        box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+        display: flex;
+        align-items: center;
+        box-sizing: border-box;
+        justify-content: center;
+    }
+
+    .header-content {
+        display: flex;
+        align-items: center;
+    }
+
+    .nut-xuat-file {
+        float: right;
+    }
+
+    .thetim {
+        display: flex;
+        align-items: center;
+    }
+
+    select {
+        border: none;
+        outline: none;
+        background-color: transparent;
+        list-style: none;
+        text-align: center;
+        font-family: Cambria;
+        font-weight: bold;
+        color: aliceblue;
+    }
+
+    option {
+        color: black;
+    }
+</style>
+<div class="card d-flex">
+
+    <div class="card-header mb-3">
+
+        <div class="form-wrapper">
+            <div class="header-content">
+                <strong style="font-size:30px;" class="text-uppercase">Danh sách môn học</strong>
+            </div>
+
+        </div>
+    </div>
+    <div class="thetim">
+        <div class="input-group d-flex">
+            <div class="form-outline">
+                <input id="search" type="search" class="form-control" placeholder="Nhập tên môn học để tìm kiếm" />
+            </div>
+            <div>
+                <button type="button" class="btn btn-primary" style="background-color: #37497e;">
+                    <i class="bi bi-search"></i>
+                </button>
+            </div>
+        </div>
+        <div class="input-group d-flex">
+            <div class="timkhoa1 mb-0">
+                @using (Html.BeginForm("TimDrop", "MonHocs", FormMethod.Post, new { @class = "form-a" }))
+                {
+                    <div class="new">
+                        <div class="nutbam nutbam--1">
+                            @Html.DropDownList("MaKhoa", "Tất cả")
+                        </div>
+                        <div><input type="submit" value="Tìm" class="nutbam nutbam--1" /> </div>
+                    </div>
+                }
+            </div>
+            <div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card-body p-3">
+    <table class="table table-bordered table-hover" id="result">
+        <thead>
+            <tr align='center'>
+                <th class="text-center">Mã môn học</th>
+                <th class="text-center">Tên môn học</th>
+                <th class="text-center">Số tiết lý thuyết</th>
+                <th class="text-center">Số tiết thực hành</th>
+                <th class="text-center">Số tín chỉ</th>
+                <th class="text-center">Tên khoa</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr id="@item.MaMH">
+                    <td class="text-center">@item.MaMH</td>
+                    <td class="text-center">@item.TenMH</td>
+                    <td class="text-center">@item.SoTietLT</td>
+                    <td class="text-center">@item.SoTietTH</td>
+                    <td class="text-center">@item.STC</td>
+                    <td class="text-center">@item.Khoa.TenKhoa</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <h5 id="view-bag">Số lượng sinh viên là: @ViewBag.SoLuong</h5>
+    <table class="table table-bordered table-hover table-a" id="search-result" style="display:none">
+        <thead>
+            <tr align='center'>
+                <th class="text-center">Mã môn học</th>
+                <th class="text-center">Tên môn học</th>
+                <th class="text-center">Số tiết lý thuyết</th>
+                <th class="text-center">Số tiết thực hành</th>
+                <th class="text-center">Số tín chỉ</th>
+                <th class="text-center">Tên khoa</th>
+            </tr>
+        </thead>
+        <tbody id="main-data">
+        </tbody>
+    </table>
+</div>
+</div>
+<a href="@Url.Action("Index", "MonHocs")">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+</a>
+<script type="text/javascript">
+     function LoadDropKhoa(a) {
+        $.ajax({
+            url: "@Url.Action("GetKhoa", "MonHocs")",
+            type: "get", //pt get
+            dataType: "json",
+success: function (data) {
+                // convert string to JS object
+                var obj = JSON.parse(data);
+                // lấy topic id đầu tiên gán cho txtTopicID
+               //$('#giatrian').val(obj[0]['MaKhoa'])
+                console.log(obj);
+                $("#select").empty();
+                if (a == "") {
+                    for (var i = 0; i < obj.length; i++) {
+                        let makhoa = obj[i]["MaKhoa"];
+                        $("#select").append("<option value=" + makhoa + " >"+ obj[i]["TenKhoa"] + "</option>");
+                    }
+                }
+                else
+                {
+                    for (var i = 0; i < obj.length; i++) {
+let makhoa = obj[i]["MaKhoa"];
+                        console.log(makhoa);
+                        if (a == makhoa)
+                        {
+                            $("#select").append("<option value=" + makhoa + " selected='selected'>"
+                                + obj[i]["TenKhoa"] + "</option>");
+                        }
+                        else
+                        {
+                            $("#select").append("<option value=" + makhoa + ">"
+                                + obj[i]["TenKhoa"] + "</option>");
+                        }
+                    }
+                }
+            }
+        });
+    }
+    $(document).ready(function () {
+        var inputElement = document.querySelector("#search");
+        console.log(inputElement);
+        inputElement.oninput = function (e) {
+            console.log(e.target.value);
+            search(e.target.value);
+        }
+    });
+    function search(keyword) {
+        $.ajax({
+             url: '@Url.Action("Getdata3", "Monhocs")',
+            type: 'post',
+            data: {
+                id: keyword,
+            },
+            success: function (data) {
+               var q = JSON.parse(data)
+                var htmldata = create(q)
+                if (keyword) {
+                    $("#result").css("display", "none");
+                    $("#search-result").css("display", "table");
+                    $("#view-bag").css("display", "none");
+                    $(".pagination").css("display", "none");
+                    $("#main-data").html(htmldata);
+                } else {
+                    $("#result").css("display", "table");
+                    $("#search-result").css("display", "none");
+                    $("#view-bag").css("display", "flex");
+                    $(".pagination").css("display", "flex");
+                }
+            }
+            });
+    }
+    function create(data) {
+        let rows = [];
+        console.log(data);
+        for (var i = 0; i < data.length; i++)
+        {
+
+            let row = `<tr id="${data[i]["MaMH"]}" class="dbname">
+          <td> ${data[i]["MaMH"]} </td>
+        <td> ${data[i]["TenMH"]} </td>
+        <td>${data[i]["SoTietLT"]}</td>
+<td>${data[i]["SoTietTH"]}</td>
+<td>${data[i]["STC"]}</td>
+        <td>${data[i]["TenKhoa"]}</td>
+        </tr>`;
+ if (data[i]["MaMH"]) {
+                rows.push(row);
+            }
+        }
+        return rows;
+    }
+</script>
